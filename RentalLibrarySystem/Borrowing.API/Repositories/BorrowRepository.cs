@@ -59,9 +59,9 @@ namespace Borrowing.API.Repositories
 
         public async Task<Borrow> IssueBookAsync(int userId, Request request)
         {
-            int fineRate = _configuration.GetValue<int>("PerDayFees");
+            int rate = _configuration.GetValue<int>("PerDayFees");
             int days = Convert.ToInt32((request.FromDate - request.ToDate).TotalDays);
-            var fees = await Task.FromResult(fineRate * days);
+            var fees = await Task.FromResult(rate * days);
 
             var borrow = new Borrow
             {
