@@ -1,65 +1,108 @@
 ﻿using Borrowing.API.Data;
 using Borrowing.API.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace Borrowing.API.Repositories
 {
     public class BorrowRepository : IBorrowRepository
     {
         private readonly BorrowContext _context;
-        public BorrowRepository(BorrowContext context)
+        private readonly IConfiguration _configuration;
+        public BorrowRepository(BorrowContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
-        public async Task<Request> BookRenewRequest(Request request)
+        public async Task<Request> BookRenewRequestAsync(Request request)
         {
-            throw new NotImplementedException();
+            return await BookReserveRequestAsync(request);
         }
 
-        public async Task<Request> BookReserveRequest(Request request)
+        public async Task<Request> BookReserveRequestAsync(Request request)
         {
-            throw new NotImplementedException();
+            await _context.Requests.AddAsync(request);
+            await _context.SaveChangesAsync();
+            return request;
         }
 
-        public async Task<List<Request>> GetAllBookRequest()
+        public async Task<List<Request>> GetAllBookRequestAsync()
         {
             return await _context.Requests.ToListAsync();
         }
 
-        public async Task<List<Borrow>> GetAllBorrowedBookByMemberId(int memberId)
+        public async Task<List<Borrow>> GetAllBorrowedBookByMemberIdAsync(int memberId)
         {
-            return await _context.Borrows.Where(c=> c.MemberId == memberId).ToListAsync();
+            return await _context.Borrows.Where(c => c.MemberId == memberId).ToListAsync();
         }
 
-        public async Task<List<Borrow>> GetAllOverDueBorrowedBook()
+        public async Task<List<Borrow>> GetAllOverDueBorrowedBookAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Borrows.Where(m => m.DueDate < DateTime.UtcNow).ToListAsync();
         }
 
-        public async Task<Borrow?> GetBorrowById(int borrowId)
+        public async Task<Borrow?> GetBorrowByIdAsync(int borrowId)
         {
             return await _context.Borrows.Where(c => c.Id == borrowId).FirstOrDefaultAsync();
         }
 
-        public async Task<Request?> GetRequestById(int requestId)
+        public async Task<Request?> GetRequestByIdAsync(int requestId)
         {
             return await _context.Requests.Where(c => c.Id == requestId).FirstOrDefaultAsync();
         }
 
-        public async Task<Return?> GetReturnById(int returnId)
+        public async Task<Return?> GetReturnByIdAsync(int returnId)
         {
-            return await _context.Returns.Where(c=> c.Id == returnId).FirstOrDefaultAsync();
+            return await _context.Returns.Where(c => c.Id == returnId).FirstOrDefaultAsync();
         }
 
-        public async Task<Borrow> IssueBook(int userId, Request request)
+        public async Task<Borrow> IssueBookAsync(int userId, Request request)
         {
-            throw new NotImplementedException();
+            int fineRate = _configuration.GetValue<int>("PerDayFees");
+            int days = Convert.ToInt32((request.FromDate - request.ToDate).TotalDays);
+            var fees = await Task.FromResult(fineRate * days);
+
+            var borrow = new Borrow
+            {
+                BookId = request.BookId,
+                DateBorrowed = request.FromDate,
+                DueDate = request.ToDate,
+                Fees = fees,
+                MemberId = request.MemberId,
+                UserId = userId
+            };
+
+            await _context.Borrows.AddAsync(borrow);
+            await _context.SaveChangesAsync();
+
+            return borrow;
         }
 
-        public async Task<Return> ReturnBook(int userId, Borrow borrow)
+        public async Task<Return> ReturnBookAsync(int userId, Borrow borrow)
         {
-            throw new NotImplementedException();
+            int fine = await CalculateFineAsync(borrow.DueDate);
+
+            var returnbook = new Return
+            {
+                DueDate = borrow.DueDate,
+                BorrowId = borrow.Id,
+                DateReturned = DateTime.UtcNow,
+                Fine = fine,
+                UserId = userId
+            };
+
+            await _context.Returns.AddAsync(returnbook);
+            await _context.SaveChangesAsync();
+
+            return returnbook;
+        }
+
+        public async Task<int> CalculateFineAsync(DateTime dueDate)
+        {
+            int fineRate = _configuration.GetValue<int>("PerDayFine");
+            int delayDays = Convert.ToInt32((DateTime.UtcNow - dueDate).TotalDays);
+            return await Task.FromResult(fineRate * delayDays);
         }
     }
 }

@@ -21,7 +21,8 @@ namespace Borrowing.API.Migrations
                     MemberId = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
                     DateBorrowed = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Fees = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -39,6 +39,9 @@ namespace Borrowing.API.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Fees")
+                        .HasColumnType("int");
+
                     b.Property<int>("MemberId")
                         .HasColumnType("int");
 

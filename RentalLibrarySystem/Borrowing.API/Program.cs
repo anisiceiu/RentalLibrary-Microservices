@@ -1,4 +1,6 @@
 using Borrowing.API.Data;
+using Borrowing.API.Repositories;
+using Catalog.API.Mapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Borrowing.API
@@ -14,6 +16,10 @@ namespace Borrowing.API
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+            builder.Services.AddScoped<IBorrowRepository,BorrowRepository>();
+            builder.Services.AddAutoMapper(typeof(MapperConfig));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

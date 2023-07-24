@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Borrowing.API.Migrations
 {
     [DbContext(typeof(BorrowContext))]
-    [Migration("20230723125339_Init")]
+    [Migration("20230724074748_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -41,6 +41,9 @@ namespace Borrowing.API.Migrations
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Fees")
+                        .HasColumnType("int");
 
                     b.Property<int>("MemberId")
                         .HasColumnType("int");

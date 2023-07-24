@@ -8,5 +8,6 @@
         public int BookId { get; set; }
         public DateTime DateBorrowed { get; set; }
         public DateTime DueDate { get; set; }
+        public int Fees { get; set; }
     }
 }
