@@ -41,7 +41,7 @@ namespace JwtAuthenticationManager
 
         }
 
-        public TokenResponse GenerateJwtToken(string username, string signingKey, string issuer, string audience,
+        public TokenResponse GenerateJwtToken(string username,List<string> roles, string signingKey, string issuer, string audience,
         TimeSpan expiration, Claim[] additionalClaims)
         {
             var token = GetJwtToken(username,signingKey, issuer, audience, expiration, additionalClaims);
@@ -49,6 +49,7 @@ namespace JwtAuthenticationManager
             var response = new TokenResponse()
             {
                 Username = username,
+                Roles = roles,
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
                 ExpiresOnUtc = token.ValidTo
             };

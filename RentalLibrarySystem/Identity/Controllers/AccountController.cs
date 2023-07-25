@@ -40,13 +40,16 @@ namespace Identity.Controllers
                 claims.Add(new Claim("UserId", loginUser.UserId.ToString()));
 
                 // Add roles as multiple claims
+                var roles = new List<string>();
                 foreach (var role in userRoles)
                 {
                     claims.Add(new Claim(ClaimTypes.Role, role.Name));
+                    roles.Add(role.Name);
                 }
 
                 var tokenresponse = _jwtTokenHandler.GenerateJwtToken(
                                 loginUser.Username,
+                                roles,
                                 JWTSettings.Secret,
                                 JWTSettings.Issuer,
                                 JWTSettings.Audience,
