@@ -2,6 +2,7 @@ using Catalog.API.Data;
 using Catalog.API.Mapper;
 using Catalog.API.Repositories;
 using Catalog.API.Repositories.Interfaces;
+using JwtAuthenticationManager.Extension;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API
@@ -18,12 +19,14 @@ namespace Catalog.API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<IBookRepository, BookRepository>();
             builder.Services.AddScoped<IBindingRepository, BindingRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             builder.Services.AddAutoMapper(typeof(MapperConfig));
 
+            builder.Services.AddCustomJwtAuthentication();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -40,7 +43,9 @@ namespace Catalog.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseStaticFiles();
 
             app.MapControllers();

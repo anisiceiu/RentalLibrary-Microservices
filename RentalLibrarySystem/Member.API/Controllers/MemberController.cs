@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common.Controllers;
 using MassTransit;
 using Member.API.DTOs;
 using Member.API.Entities;
@@ -10,7 +11,7 @@ namespace Member.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MemberController : ControllerBase
+    public class MemberController : BaseController
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IPublishEndpoint _publishEndpoint;

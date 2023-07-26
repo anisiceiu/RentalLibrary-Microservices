@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Borrowing.API.Repositories;
+using Common.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace Borrowing.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BorrowController : ControllerBase
+    public class BorrowController : BaseController
     {
         private readonly IBorrowRepository  _borrowRepository;
         private readonly IMapper _mapper;

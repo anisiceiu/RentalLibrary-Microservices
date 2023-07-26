@@ -1,4 +1,5 @@
 using Common;
+using JwtAuthenticationManager.Extension;
 using MassTransit;
 using Member.API.Data;
 using Member.API.Mapper;
@@ -20,6 +21,7 @@ namespace Member.API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 
             builder.Services.AddAutoMapper(typeof(MapperConfig));
@@ -37,7 +39,7 @@ namespace Member.API
                 });
             });
 
-
+            builder.Services.AddCustomJwtAuthentication();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -54,6 +56,7 @@ namespace Member.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

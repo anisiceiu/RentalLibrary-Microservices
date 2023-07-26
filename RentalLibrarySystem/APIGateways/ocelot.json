@@ -25,7 +25,7 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/catalog",
+      "UpstreamPathTemplate": "/catalog/getbooks",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/catalog/GetBooks",
       "DownstreamScheme": "https",

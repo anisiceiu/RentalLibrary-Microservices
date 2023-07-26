@@ -10,7 +10,7 @@ export class OverviewComponent {
 
     constructor(private catalogService:CatalogService)
     {
-       catalogService.getRoles().subscribe(r=>{
+       catalogService.getBooks().subscribe(r=>{
         console.log(r);
        })
     }

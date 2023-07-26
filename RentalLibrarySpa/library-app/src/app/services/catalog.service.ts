@@ -10,8 +10,8 @@ export class CatalogService {
 
   constructor(private http: HttpClient) {}
 
-  public getRoles()
+  public getBooks()
   {
-    return this.http.get<any>(`${this.baseUrl}/account/getroles`);
+    return this.http.get<any>(`${this.baseUrl}/catalog/getbooks`);
   }
 }

@@ -1,6 +1,7 @@
 using Borrowing.API.Data;
 using Borrowing.API.Repositories;
 using Catalog.API.Mapper;
+using JwtAuthenticationManager.Extension;
 using Microsoft.EntityFrameworkCore;
 
 namespace Borrowing.API
@@ -17,10 +18,12 @@ namespace Borrowing.API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
             builder.Services.AddScoped<IBorrowRepository,BorrowRepository>();
             builder.Services.AddAutoMapper(typeof(MapperConfig));
 
+            builder.Services.AddCustomJwtAuthentication();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -37,6 +40,7 @@ namespace Borrowing.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

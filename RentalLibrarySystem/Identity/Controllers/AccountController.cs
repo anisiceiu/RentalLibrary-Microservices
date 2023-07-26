@@ -1,4 +1,5 @@
-﻿using Identity.DTOs;
+﻿using Common.Controllers;
+using Identity.DTOs;
 using Identity.Repositories.Interfaces;
 using JwtAuthenticationManager;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +13,7 @@ namespace Identity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : BaseController
     {
         private readonly IUserRepository _userRepository;
         private readonly JwtTokenHandler _jwtTokenHandler;
@@ -38,6 +39,7 @@ namespace Identity.Controllers
                 claims.Add(new Claim("UserName", loginUser.Username));
                 claims.Add(new Claim("Email", loginUser.Email));
                 claims.Add(new Claim("UserId", loginUser.UserId.ToString()));
+                claims.Add(new Claim("MemberId", Convert.ToInt32(loginUser.MemberId).ToString()));
 
                 // Add roles as multiple claims
                 var roles = new List<string>();

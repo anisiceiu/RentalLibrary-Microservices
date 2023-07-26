@@ -2,6 +2,8 @@
 using Catalog.API.DTOs;
 using Catalog.API.Entities;
 using Catalog.API.Repositories.Interfaces;
+using Common.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
@@ -10,7 +12,7 @@ namespace Catalog.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CatalogController : ControllerBase
+    public class CatalogController : BaseController
     {
         private readonly IBookRepository _bookRepository;
         private readonly ICategoryRepository _categoryRepository;
@@ -27,9 +29,11 @@ namespace Catalog.API.Controllers
             _hostEnvironment = hostEnvironment;
         }
 
+        [Authorize]
         [HttpGet("GetBooks")]
         public async Task<IEnumerable<BookDto>> GetBooksAsync()
         {
+            var u = base.CurrentUser;
             return  _mapper.Map<IEnumerable<BookDto>>(await _bookRepository.GetBooksAsync());
         }
 
