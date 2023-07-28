@@ -22,7 +22,7 @@ namespace APIGateways
                 options.AddDefaultPolicy(
                     policy =>
                     {
-                        policy.WithOrigins("*");
+                        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
 

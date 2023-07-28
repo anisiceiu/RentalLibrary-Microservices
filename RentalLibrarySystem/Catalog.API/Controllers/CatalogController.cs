@@ -29,7 +29,7 @@ namespace Catalog.API.Controllers
             _hostEnvironment = hostEnvironment;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetBooks")]
         public async Task<IEnumerable<BookDto>> GetBooksAsync()
         {

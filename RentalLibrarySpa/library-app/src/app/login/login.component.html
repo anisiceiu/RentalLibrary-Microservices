@@ -11,7 +11,7 @@
                                             <label>Username<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                                <input type="text" class="form-control" placeholder="Enter Username">
+                                                <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Enter Username">
                                             </div>
                                         </div>
 
@@ -19,7 +19,7 @@
                                             <label>Password<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
-                                                <input type="text" class="form-control" placeholder="Enter Password">
+                                                <input type="text" [(ngModel)]="password" name="password" class="form-control" placeholder="Enter Password">
                                             </div>
                                         </div>
 
@@ -28,7 +28,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-primary px-4 float-end mt-4">login</button>
+                                            <button type="submit" (click)="login()" class="btn btn-primary px-4 float-end mt-4">login</button>
                                         </div>
                                 </form>
                             </div>
