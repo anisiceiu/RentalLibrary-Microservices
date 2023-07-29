@@ -6,14 +6,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterMemberComponent } from './register-member/register-member.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './helpers/auth.guard';
+import { RoleGuard } from './helpers/role.guard';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterMemberComponent},
-  {path:'', component:LandingPageComponent,
+  {path:'', component:LandingPageComponent,canActivate:[AuthGuard],
    children:[
-    {path:'overview',component:OverviewComponent}
+    {path:'overview',component:OverviewComponent,data:{role:'User'},canActivate:[RoleGuard]}
    ] 
   },
   { path:'404',component:NotFoundComponent},

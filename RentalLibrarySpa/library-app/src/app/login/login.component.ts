@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent {
   password: string='';
   error: string='';
 
-  constructor(private router: Router,private authService:AuthenticationService) { }
+  constructor(private router: Router,private authService:AuthenticationService) {
+    
+   }
 
   ngOnInit(): void {
   }
@@ -28,6 +31,7 @@ export class LoginComponent {
         }
         else{
             this.error = 'Invalid username or password';
+            console.log('login e esecilo...')
         }
 
       });
