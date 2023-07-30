@@ -6,43 +6,61 @@
                     <div class="row">
                         <div class="col-md-7 pe-0">
                             <div class="form-left h-100 py-5 px-5">
-                                <form action="" class="row g-4">
+                                <div class="row g-4">
                                         <div class="col-12">
-                                            <label>Username<span class="text-danger">*</span></label>
+                                            <label>Name<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                                <input type="text" class="form-control" placeholder="Enter Username">
+                                                <input type="text" [(ngModel)]="member.name" name="name" class="form-control" placeholder="Enter Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>Contact No<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                                <input type="text" [(ngModel)]="member.contactNo" name="contactNo" class="form-control" placeholder="Enter contact no">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label>Email<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                                <input type="text" class="form-control" placeholder="Enter Email">
+                                                <input type="text" [(ngModel)]="member.email" name="email" class="form-control" placeholder="Enter Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>Address<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                                <input type="text" [(ngModel)]="member.address" name="address" class="form-control" placeholder="Enter Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>Username<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                                <input type="text" [(ngModel)]="member.userName" name="Username" class="form-control" placeholder="Enter Username">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label>Password<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
-                                                <input type="text" class="form-control" placeholder="Enter Password">
+                                                <input type="password" [(ngModel)]="member.password" name="password" class="form-control" placeholder="Enter Password">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label>Retype-Password<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
-                                                <input type="text" class="form-control" placeholder="Enter Password Again">
+                                                <input type="password" [(ngModel)]="member.reTypepassword" name="reTypepassword" class="form-control" placeholder="Enter Password Again">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <a href="javascript:void(0)" class="float-end text-primary">Forgot Password?</a>
                                         </div>
 
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-primary px-4 float-end mt-4">Submit</button>
+                                            <button (click)="addMember()" class="btn btn-primary px-4 float-end mt-4">Submit</button>
                                         </div>
-                                </form>
+                                    </div>
                             </div>
                         </div>
                         <div class="col-md-5 ps-0 d-none d-md-block">

@@ -49,14 +49,14 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/writers",
+      "UpstreamPathTemplate": "/member/AddMember",
       "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamPathTemplate": "/api/writers",
+      "DownstreamPathTemplate": "/api/member/AddMember",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5002
+          "Port": 7081
         }
       ]
     },
