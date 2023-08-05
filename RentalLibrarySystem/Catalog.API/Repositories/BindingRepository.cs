@@ -12,10 +12,11 @@ namespace Catalog.API.Repositories
         {
             _context = context;
         }
-        public async Task CreateBindingAsync(Binding binding)
+        public async Task<Binding> CreateBindingAsync(Binding binding)
         {
             _context.Bindings.Add(binding);
             await _context.SaveChangesAsync();
+            return binding;
         }
 
         public async Task<bool> DeleteBindingAsync(int id)

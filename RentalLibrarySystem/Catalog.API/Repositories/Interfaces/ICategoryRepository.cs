@@ -5,7 +5,7 @@ namespace Catalog.API.Repositories.Interfaces
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> GetCatergoriesAsync();
-        Task CreateCatergoryAsync(Category  catergory);
+        Task<Category> CreateCatergoryAsync(Category  catergory);
         Task<bool> UpdateCatergoryAsync(Category catergory);
         Task<bool> DeleteCatergoryAsync(int id);
     }

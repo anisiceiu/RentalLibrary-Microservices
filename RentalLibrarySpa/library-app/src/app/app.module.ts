@@ -16,6 +16,8 @@ import { RegisterMemberComponent } from './register-member/register-member.compo
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { RoleGuard } from './helpers/role.guard';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddBindingComponent } from './add-binding/add-binding.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { RoleGuard } from './helpers/role.guard';
     NotFoundComponent,
     LoginComponent,
     RegisterMemberComponent,
-    HomeComponent
+    HomeComponent,
+    AddCategoryComponent,
+    AddBindingComponent
   ],
   imports: [
     BrowserModule,

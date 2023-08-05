@@ -12,10 +12,11 @@ namespace Catalog.API.Repositories
         {
             _context = context;
         }
-        public async Task CreateCatergoryAsync(Category  catergory)
+        public async Task<Category> CreateCatergoryAsync(Category  catergory)
         {
             _context.Catergories.Add(catergory);
             await _context.SaveChangesAsync();
+            return catergory;
         }
 
         public async Task<bool> DeleteCatergoryAsync(int id)

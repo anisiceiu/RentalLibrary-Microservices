@@ -49,6 +49,66 @@
       ]
     },
     {
+      "UpstreamPathTemplate": "/catalog/addbook",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/catalog/addbook",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7207
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/catalog/AddCategory",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/catalog/AddCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7207
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/catalog/GetCategories",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/catalog/GetCategories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7207
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/catalog/AddBinding",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/catalog/AddBinding",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7207
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/catalog/GetBindings",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/catalog/GetBindings",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7207
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/member/AddMember",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamPathTemplate": "/api/member/AddMember",

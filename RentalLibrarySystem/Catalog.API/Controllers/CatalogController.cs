@@ -29,7 +29,7 @@ namespace Catalog.API.Controllers
             _hostEnvironment = hostEnvironment;
         }
 
-        //[Authorize]
+        
         [HttpGet("GetBooks")]
         public async Task<IEnumerable<BookDto>> GetBooksAsync()
         {
@@ -43,6 +43,7 @@ namespace Catalog.API.Controllers
             return _mapper.Map<BookDto>(await _bookRepository.GetBookAsync(id));
         }
 
+        [Authorize]
         [HttpPost("AddBook")]
         public async Task<IActionResult> AddBooksAsync([FromForm] BookDto book)
         {
@@ -72,18 +73,32 @@ namespace Catalog.API.Controllers
             
         }
 
+        [Authorize]
         [HttpPost("AddCategory")]
         public async Task<IActionResult> AddCategoryAsync(CategoryDto catergory)
         {
-            await  _categoryRepository.CreateCatergoryAsync(_mapper.Map<Category>(catergory));
-            return Ok();
+            var cat = await  _categoryRepository.CreateCatergoryAsync(_mapper.Map<Category>(catergory));
+            return Ok(cat);
         }
 
+        [HttpGet("GetCategories")]
+        public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
+        {
+            return _mapper.Map<IEnumerable<CategoryDto>>(await _categoryRepository.GetCatergoriesAsync());
+        }
+
+        [HttpGet("GetBindings")]
+        public async Task<IEnumerable<BindingDto>> GetBindingsAsync()
+        {
+            return _mapper.Map<IEnumerable<BindingDto>>(await _bindingRepository.GetBindingsAsync());
+        }
+
+        [Authorize]
         [HttpPost("AddBinding")]
         public async Task<IActionResult> AddBindingAsync(BindingDto binding)
         {
-            await _bindingRepository.CreateBindingAsync(_mapper.Map<Binding>(binding));
-            return Ok();
+            var bind = await _bindingRepository.CreateBindingAsync(_mapper.Map<Binding>(binding));
+            return Ok(bind);
         }
     }
 }

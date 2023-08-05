@@ -15,7 +15,7 @@ export class RoleGuard {
       let routeRole = route.data['role'];
       let user = JSON.parse(<string>localStorage.getItem('user_token'));
 
-      if (user.roles && user.roles.includes(routeRole)) {
+      if (user.roles && (user.roles.includes(routeRole) || user.roles.includes('Administrator'))) {
         return true;
       }
 

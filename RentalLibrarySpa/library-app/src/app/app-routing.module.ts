@@ -8,6 +8,8 @@ import { RegisterMemberComponent } from './register-member/register-member.compo
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { RoleGuard } from './helpers/role.guard';
+import { AddBindingComponent } from './add-binding/add-binding.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -15,7 +17,9 @@ const routes: Routes = [
   {path:'register',component:RegisterMemberComponent},
   {path:'', component:LandingPageComponent,canActivate:[AuthGuard],
    children:[
-    {path:'overview',component:OverviewComponent,data:{role:'User'},canActivate:[RoleGuard]}
+    {path:'overview',component:OverviewComponent,data:{role:'User'},canActivate:[RoleGuard]},
+    {path:'add-binding',component:AddBindingComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
+    {path:'add-category',component:AddCategoryComponent,data:{role:'Administrator'},canActivate:[RoleGuard]}
    ] 
   },
   { path:'404',component:NotFoundComponent},
