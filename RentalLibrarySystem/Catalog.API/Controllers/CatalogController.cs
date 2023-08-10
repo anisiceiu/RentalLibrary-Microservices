@@ -64,9 +64,9 @@ namespace Catalog.API.Controllers
                     }
                 }
 
-                await _bookRepository.CreateBookAsync(b);
+               var book_result = await _bookRepository.CreateBookAsync(b);
 
-                return Ok();
+                return Ok(book_result);
             }
 
             return BadRequest();

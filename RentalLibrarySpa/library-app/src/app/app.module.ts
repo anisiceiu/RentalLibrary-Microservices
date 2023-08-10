@@ -18,6 +18,7 @@ import { AuthGuard } from './helpers/auth.guard';
 import { RoleGuard } from './helpers/role.guard';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddBindingComponent } from './add-binding/add-binding.component';
+import { AddBookComponent } from './add-book/add-book.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AddBindingComponent } from './add-binding/add-binding.component';
     RegisterMemberComponent,
     HomeComponent,
     AddCategoryComponent,
-    AddBindingComponent
+    AddBindingComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,89 @@
+<div class="login-page bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="bg-white shadow rounded">
+                    <div class="row">
+                        <div class="col-md-7 pe-0">
+                            <form (ngSubmit)="addBook()" class="form-left h-100 py-5 px-5">
+                                <div class="row g-4">
+                                    <div class="col-12">
+                                        <label>Title<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                            <input type="text" [(ngModel)]="book.title" autocomplete="off"  name="title" class="form-control" placeholder="Enter Book Title">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Author</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                            <input type="text" [(ngModel)]="book.author" autocomplete="off"  name="author" class="form-control" placeholder="Enter Author Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Category<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                           <select class="form-control" name="category" [(ngModel)]="book.categoryId">
+                                            <option value="0">Select a Category...</option>
+                                            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                                           </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Binding<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <select class="form-control" name="binding" [(ngModel)]="book.bindingId">
+                                             <option value="0">Select a bindings...</option>
+                                             <option *ngFor="let binding of bindings" [value]="binding.id">{{ binding.name }}</option>
+                                            </select>
+                                         </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>ISBN<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                            <input type="text" [(ngModel)]="book.iSBN" autocomplete="off"  name="isbn" class="form-control" placeholder="Enter ISBN">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Publish Year<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                            <input type="text" [(ngModel)]="book.publishYear" autocomplete="off"  name="publishYear" class="form-control" placeholder="Enter publish Year">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Language</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                            <input type="text" [(ngModel)]="book.language" autocomplete="off"  name="language" class="form-control" placeholder="Enter language">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>No Of Copies<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                            <input type="number" [(ngModel)]="book.noOfCopies" autocomplete="off"  name="noOfCopies" class="form-control" placeholder="Enter no Of Copies">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Thumbnail Image<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                            <input type="file" id="image" name="image" class="form-control" (change)="handleImageInput($event)" required>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary px-4 float-end mt-4">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

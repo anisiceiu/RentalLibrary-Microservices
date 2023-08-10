@@ -10,7 +10,7 @@ namespace Catalog.API.Repositories.Interfaces
         Task<IEnumerable<Book>> GetBooksByCategoryAsync(int categoryId);
         Task<IEnumerable<Book>> GetBooksByBindingAsync(int bindingId);
 
-        Task CreateBookAsync(Book Book);
+        Task<Book> CreateBookAsync(Book Book);
         Task<bool> UpdateBookAsync(Book Book);
         Task<bool> DeleteBookAsync(int id);
     }

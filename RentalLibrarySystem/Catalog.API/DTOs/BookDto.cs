@@ -10,6 +10,7 @@ namespace Catalog.API.DTOs
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
+        public string Author { get; set; }
         [Required]
         public string ISBN { get; set; }
         public int PublishYear { get; set; }

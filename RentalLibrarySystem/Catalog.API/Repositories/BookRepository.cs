@@ -12,10 +12,11 @@ namespace Catalog.API.Repositories
         {
             _context = context;
         }
-        public async Task CreateBookAsync(Book Book)
+        public async Task<Book> CreateBookAsync(Book book)
         {
-            _context.Books.Add(Book);
-           await _context.SaveChangesAsync();
+            _context.Books.Add(book);
+            await _context.SaveChangesAsync();
+            return book;
         }
 
         public async Task<bool> DeleteBookAsync(int id)

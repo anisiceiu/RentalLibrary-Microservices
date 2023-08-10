@@ -10,6 +10,7 @@ import { AuthGuard } from './helpers/auth.guard';
 import { RoleGuard } from './helpers/role.guard';
 import { AddBindingComponent } from './add-binding/add-binding.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddBookComponent } from './add-book/add-book.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
    children:[
     {path:'overview',component:OverviewComponent,data:{role:'User'},canActivate:[RoleGuard]},
     {path:'add-binding',component:AddBindingComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
-    {path:'add-category',component:AddCategoryComponent,data:{role:'Administrator'},canActivate:[RoleGuard]}
+    {path:'add-category',component:AddCategoryComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
+    {path:'add-book',component:AddBookComponent,data:{role:'Administrator'},canActivate:[RoleGuard]}
    ] 
   },
   { path:'404',component:NotFoundComponent},
