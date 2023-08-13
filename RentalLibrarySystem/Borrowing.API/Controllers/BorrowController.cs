@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Borrowing.API.Entities;
 using Borrowing.API.Repositories;
 using Common.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 
 namespace Borrowing.API.Controllers
 {
@@ -16,6 +19,20 @@ namespace Borrowing.API.Controllers
         {
             _borrowRepository = borrowRepository;
             _mapper = mapper;
+        }
+
+        [Authorize]
+        [HttpPost("BookReserveRequest")]
+        public async Task<IActionResult> BookReserveRequestAsync(Request request)
+        {
+            request.MemberId = Convert.ToInt32(base.CurrentUser.MemberId);
+
+            var result = await _borrowRepository.BookReserveRequestAsync(request);
+
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest();
         }
 
         [HttpGet("GetFineTest")]

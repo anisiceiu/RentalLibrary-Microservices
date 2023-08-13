@@ -121,14 +121,14 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/articles",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/articles",
+      "UpstreamPathTemplate": "/Borrow/BookReserveRequest",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Borrow/BookReserveRequest",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 7197
         }
       ]
     },

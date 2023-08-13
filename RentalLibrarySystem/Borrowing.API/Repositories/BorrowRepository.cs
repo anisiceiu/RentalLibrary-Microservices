@@ -1,7 +1,7 @@
 ﻿using Borrowing.API.Data;
 using Borrowing.API.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+using RestSharp;
 
 namespace Borrowing.API.Repositories
 {
@@ -22,9 +22,21 @@ namespace Borrowing.API.Repositories
 
         public async Task<Request> BookReserveRequestAsync(Request request)
         {
-            await _context.Requests.AddAsync(request);
-            await _context.SaveChangesAsync();
-            return request;
+            var client = new RestClient(_configuration.GetValue<string>("CatalogApiBaseUrl"));
+            var req = new RestRequest($"/api/Catalog/GetIsBookAvailable/{request.BookId}");
+            var response = client.ExecuteGet<bool>(req);
+
+            if (response.Data)
+            {
+                await _context.Requests.AddAsync(request);
+                await _context.SaveChangesAsync();
+                return request;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         public async Task<List<Request>> GetAllBookRequestAsync()

@@ -42,6 +42,18 @@ namespace Catalog.API.Controllers
             return _mapper.Map<BookDto>(await _bookRepository.GetBookAsync(id));
         }
 
+
+        [HttpGet("GetIsBookAvailable/{id}")]
+        public async Task<bool> GetIsBookAvailableAsync(int id)
+        {
+            var book = await _bookRepository.GetBookAsync(id);
+
+            if(book != null)
+                return book.NoOfAvailableCopies > 0;
+            else
+                return false;
+        }
+
         [Authorize]
         [HttpPost("AddBook")]
         public async Task<IActionResult> AddBooksAsync([FromForm] BookDto book)
