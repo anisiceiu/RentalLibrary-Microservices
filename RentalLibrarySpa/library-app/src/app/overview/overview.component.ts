@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CatalogService } from '../services/catalog.service';
 import { Book } from '../models/book';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -12,6 +14,7 @@ export class OverviewComponent {
   bookList: Array<Book>;
     constructor(private catalogService:CatalogService)
     {
+      
       this.bookList = new Array<Book>();
       this.getbookList();
     }

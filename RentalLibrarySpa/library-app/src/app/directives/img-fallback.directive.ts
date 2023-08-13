@@ -15,7 +15,7 @@ export class ImgFallbackDirective {
   LoadFallbackOnError()
   {
     const element:HTMLImageElement = <HTMLImageElement> this.eRef.nativeElement;
-    element.src = this.appImgFallback || 'https://via.placeholder.com/200'
+    element.src = this.appImgFallback || '/assets/images/NoImage.png';
   }
 
 }
