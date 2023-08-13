@@ -19,6 +19,7 @@ import { RoleGuard } from './helpers/role.guard';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddBindingComponent } from './add-binding/add-binding.component';
 import { AddBookComponent } from './add-book/add-book.component';
+import { ImgFallbackDirective } from './directives/img-fallback.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AddBookComponent } from './add-book/add-book.component';
     HomeComponent,
     AddCategoryComponent,
     AddBindingComponent,
-    AddBookComponent
+    AddBookComponent,
+    ImgFallbackDirective
   ],
   imports: [
     BrowserModule,

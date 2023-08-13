@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CatalogService } from '../services/catalog.service';
+import { Book } from '../models/book';
 
 @Component({
   selector: 'app-overview',
@@ -8,10 +9,18 @@ import { CatalogService } from '../services/catalog.service';
 })
 export class OverviewComponent {
 
+  bookList: Array<Book>;
     constructor(private catalogService:CatalogService)
     {
-       catalogService.getBooks().subscribe(r=>{
-        console.log(r);
-       })
+      this.bookList = new Array<Book>();
+      this.getbookList();
+    }
+
+    getbookList()
+    {
+      this.catalogService.getBooks().subscribe(data=>{
+        this.bookList = data;
+        console.log(data);
+       });
     }
 }

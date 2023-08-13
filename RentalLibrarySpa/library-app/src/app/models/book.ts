@@ -2,7 +2,7 @@ export class Book {
     id?: number;
     title: string="";
     author:string="";
-    iSBN: string="";
+    isbn: string="";
     publishYear: number=1000;
     language: string="";
     noOfCopies: number=0;

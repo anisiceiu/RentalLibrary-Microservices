@@ -33,7 +33,6 @@ namespace Catalog.API.Controllers
         [HttpGet("GetBooks")]
         public async Task<IEnumerable<BookDto>> GetBooksAsync()
         {
-            var u = base.CurrentUser;
             return  _mapper.Map<IEnumerable<BookDto>>(await _bookRepository.GetBooksAsync());
         }
 
@@ -60,7 +59,9 @@ namespace Catalog.API.Controllers
                         string fileName = Guid.NewGuid() + ".png";
                         string filePath = Path.Combine(_hostEnvironment.WebRootPath, "BookCover",fileName);
                         System.IO.File.WriteAllBytes(filePath, bytes);
-                        b.ThumbnailImageUrl = $"/BookCover/{fileName}";
+
+                        var baseurl = base.BaseUrl;
+                        b.ThumbnailImageUrl = $"{baseurl}BookCover/{fileName}";
                     }
                 }
 

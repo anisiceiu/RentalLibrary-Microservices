@@ -43,7 +43,7 @@ export class CatalogService {
     const formData = new FormData();
     formData.append('title', book.title);
     formData.append('author', book.author);
-    formData.append('iSBN', book.iSBN);
+    formData.append('iSBN', book.isbn);
     formData.append('publishYear', book.publishYear.toString());
     formData.append('language', book.language);
     formData.append('noOfCopies', book.noOfCopies.toString());

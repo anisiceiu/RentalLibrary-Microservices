@@ -48,7 +48,7 @@ export class AddBookComponent {
   addBook()
   {
     debugger;
-    if(this.book.title && this.book.iSBN && this.book.formFile)
+    if(this.book.title && this.book.isbn && this.book.formFile)
     {
       this.book.noOfAvailableCopies = this.book.noOfCopies;
 
