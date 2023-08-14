@@ -2,6 +2,7 @@
 using Borrowing.API.Entities;
 using Borrowing.API.Repositories;
 using Common.Controllers;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,12 @@ namespace Borrowing.API.Controllers
     {
         private readonly IBorrowRepository  _borrowRepository;
         private readonly IMapper _mapper;
-        public BorrowController(IBorrowRepository borrowRepository, IMapper mapper)
+        private readonly IPublishEndpoint _publishEndpoint;
+        public BorrowController(IBorrowRepository borrowRepository, IPublishEndpoint publishEndpoint, IMapper mapper)
         {
             _borrowRepository = borrowRepository;
             _mapper = mapper;
+            _publishEndpoint = publishEndpoint;
         }
 
         [Authorize]
@@ -31,7 +34,11 @@ namespace Borrowing.API.Controllers
             var result = await _borrowRepository.BookReserveRequestAsync(request);
 
             if (result != null)
-                return Ok(result);
+            {
+                var reserve_request = _mapper.Map<Common.SharedModels.Request>(result);
+                await _publishEndpoint.Publish(reserve_request);
+                return Ok(result); 
+            }
             else
                 return BadRequest("Could not be reserved.");
         }

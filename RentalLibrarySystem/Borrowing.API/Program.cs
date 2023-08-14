@@ -1,7 +1,9 @@
 using Borrowing.API.Data;
 using Borrowing.API.Repositories;
-using Catalog.API.Mapper;
+using Borrowing.API.Mapper;
+using Common;
 using JwtAuthenticationManager.Extension;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace Borrowing.API
@@ -22,6 +24,19 @@ namespace Borrowing.API
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
             builder.Services.AddScoped<IBorrowRepository,BorrowRepository>();
             builder.Services.AddAutoMapper(typeof(MapperConfig));
+
+            builder.Services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    var uri = new Uri(ServiceBus.Url);
+                    cfg.Host(uri, host =>
+                    {
+                        host.Username(ServiceBus.UserName);
+                        host.Password(ServiceBus.Password);
+                    });
+                });
+            });
 
             builder.Services.AddCustomJwtAuthentication();
             builder.Services.AddControllers();

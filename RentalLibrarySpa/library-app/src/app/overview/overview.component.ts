@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BorrowService } from '../services/borrow.service';
 import { ReserveRequest } from '../models/request';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-overview',
@@ -17,7 +18,7 @@ export class OverviewComponent {
   pageSize:number=10;
   bookList: Array<Book>;
   paginatedBookList:Array<Book>= new Array<Book>();
-  constructor(private catalogService: CatalogService, private borrowService: BorrowService) {
+  constructor(private catalogService: CatalogService, private borrowService: BorrowService,private toastr:ToastrService) {
 
     this.bookList = new Array<Book>();
     this.getbookList();
@@ -34,7 +35,10 @@ export class OverviewComponent {
     request.bookName = book.title;
 
     this.borrowService.reseveBook(request).subscribe((data) => {
-      console.log("borrow message:", data);
+        if(data)
+        {
+          this.toastr.success("Book reserved Successfully!");
+        }
     });
   }
 

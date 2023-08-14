@@ -1,8 +1,11 @@
+using Catalog.API.Consumer;
 using Catalog.API.Data;
 using Catalog.API.Mapper;
 using Catalog.API.Repositories;
 using Catalog.API.Repositories.Interfaces;
+using Common;
 using JwtAuthenticationManager.Extension;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API
@@ -25,7 +28,26 @@ namespace Catalog.API
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             builder.Services.AddAutoMapper(typeof(MapperConfig));
+            builder.Services.AddMassTransit(x =>
+            {
+                x.AddConsumer<ReserveBookConsumer>();
 
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    var uri = new Uri(ServiceBus.Url);
+                    cfg.Host(uri, host =>
+                    {
+                        host.Username(ServiceBus.UserName);
+                        host.Password(ServiceBus.Password);
+                    });
+
+                    cfg.ReceiveEndpoint(ServiceBus.QueueNames.catalogQueue, c =>
+                    {
+                        c.ConfigureConsumer<ReserveBookConsumer>(context);
+                    });
+
+                });
+            });
             builder.Services.AddCustomJwtAuthentication();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
+using Borrowing.API.Entities;
 
-namespace Catalog.API.Mapper
+namespace Borrowing.API.Mapper
 {
     public class MapperConfig : Profile
     {
         public MapperConfig()
         {
-           
+            CreateMap<Request, Common.SharedModels.Request>().ReverseMap();
         }
     }
 }
