@@ -10,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { LoginComponent } from './login/login.component';
 import { RegisterMemberComponent } from './register-member/register-member.component';
@@ -20,6 +21,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddBindingComponent } from './add-binding/add-binding.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { ImgFallbackDirective } from './directives/img-fallback.directive';
+import { RequestListComponent } from './request-list/request-list.component';
 
 @NgModule({
   declarations: [
@@ -33,13 +35,15 @@ import { ImgFallbackDirective } from './directives/img-fallback.directive';
     AddCategoryComponent,
     AddBindingComponent,
     AddBookComponent,
-    ImgFallbackDirective
+    ImgFallbackDirective,
+    RequestListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    PaginationModule.forRoot(),
     HttpClientModule,
     AppRoutingModule
   ],

@@ -5,6 +5,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { BorrowService } from '../services/borrow.service';
 import { ReserveRequest } from '../models/request';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-overview',
@@ -13,34 +14,42 @@ import { ReserveRequest } from '../models/request';
 })
 export class OverviewComponent {
 
+  pageSize:number=10;
   bookList: Array<Book>;
-    constructor(private catalogService:CatalogService,private borrowService:BorrowService)
-    {
-      
-      this.bookList = new Array<Book>();
-      this.getbookList();
-    }
+  paginatedBookList:Array<Book>= new Array<Book>();
+  constructor(private catalogService: CatalogService, private borrowService: BorrowService) {
 
-    
+    this.bookList = new Array<Book>();
+    this.getbookList();
+  }
 
-    reserveRequest(book:Book)
-    {
-      var request = new ReserveRequest(); 
-      request.bookId = book.id || 0;
-      request.fromDate = new Date();
-      request.toDate = this.borrowService.addDays(new Date(),3);
-      request.requestType ="Reserve";
 
-      this.borrowService.reseveBook(request).subscribe((data)=>{
-        console.log("borrow message:",data);
-      });
-    }
 
-    getbookList()
-    {
-      this.catalogService.getBooks().subscribe(data=>{
-        this.bookList = data;
-        console.log(data);
-       });
-    }
+  reserveRequest(book: Book) {
+    var request = new ReserveRequest();
+    request.bookId = book.id || 0;
+    request.fromDate = new Date();
+    request.toDate = this.borrowService.addDays(new Date(), 3);
+    request.requestType = "Reserve";
+    request.bookName = book.title;
+
+    this.borrowService.reseveBook(request).subscribe((data) => {
+      console.log("borrow message:", data);
+    });
+  }
+
+  getbookList() {
+    this.catalogService.getBooks().subscribe(data => {
+      this.bookList = data;
+      this.paginatedBookList = this.bookList.slice(0,this.pageSize)
+      console.log(data);
+    });
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.paginatedBookList = this.bookList.slice(startItem, endItem);
+  }
+  
 }

@@ -40,6 +40,7 @@ namespace Identity.Controllers
                 claims.Add(new Claim("Email", loginUser.Email));
                 claims.Add(new Claim("UserId", loginUser.UserId.ToString()));
                 claims.Add(new Claim("MemberId", Convert.ToInt32(loginUser.MemberId).ToString()));
+                claims.Add(new Claim("MemberName", loginUser.MemberName?? ""));
 
                 // Add roles as multiple claims
                 var roles = new List<string>();

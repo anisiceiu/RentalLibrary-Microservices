@@ -27,6 +27,7 @@ namespace Common.Controllers
                 currentUser.UserName = identity.FindFirst("UserName").Value;
                 currentUser.Email = identity.FindFirst("Email").Value;
                 currentUser.MemberId = Convert.ToInt32(identity.FindFirst("MemberId").Value);
+                currentUser.MemberName = identity.FindFirst("MemberName").Value;
             }
         }
 

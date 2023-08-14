@@ -26,13 +26,14 @@ namespace Borrowing.API.Controllers
         public async Task<IActionResult> BookReserveRequestAsync(Request request)
         {
             request.MemberId = Convert.ToInt32(base.CurrentUser.MemberId);
+            request.MemberName = base.CurrentUser.MemberName;
 
             var result = await _borrowRepository.BookReserveRequestAsync(request);
 
             if (result != null)
                 return Ok(result);
             else
-                return BadRequest();
+                return BadRequest("Could not be reserved.");
         }
 
         [HttpGet("GetFineTest")]

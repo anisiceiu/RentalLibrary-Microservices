@@ -9,5 +9,6 @@
         public string PasswordHash { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public int? MemberId { get; set; }
+        public string? MemberName { get; set; }
     }
 }
