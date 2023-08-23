@@ -6,4 +6,5 @@ export class ReserveRequest{
     requestType:string="Reserve";
     fromDate:Date=new Date();
     toDate:Date = new Date();
+    memberName:string="";
 }

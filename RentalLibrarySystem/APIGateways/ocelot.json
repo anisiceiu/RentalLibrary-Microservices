@@ -133,14 +133,14 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/articles/{id}",
-      "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamPathTemplate": "/api/articles/{id}",
+      "UpstreamPathTemplate": "/Borrow/GetBookRequests",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Borrow/GetBookRequests",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 7197
         }
       ]
     }

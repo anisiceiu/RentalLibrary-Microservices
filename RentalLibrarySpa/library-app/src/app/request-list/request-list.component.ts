@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ReserveRequest } from '../models/request';
+import { BorrowService } from '../services/borrow.service';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-request-list',
@@ -7,12 +10,26 @@ import { Component } from '@angular/core';
 })
 export class RequestListComponent {
 
-/*   pageSize:number=10;
-  bookList: Array<Book>;
-  paginatedBookList:Array<Book>= new Array<Book>();
-  constructor(private catalogService: CatalogService, private borrowService: BorrowService) {
+  pageSize:number=10;
+  bookRequestList: Array<ReserveRequest>;
+  paginatedBookRequestList:Array<ReserveRequest>= new Array<ReserveRequest>();
+  constructor(private borrowService: BorrowService) {
 
-    this.bookList = new Array<Book>();
-    this.getbookList();
-  } */
+    this.bookRequestList = new Array<ReserveRequest>();
+    this.getbookRequestList();
+  } 
+
+  getbookRequestList() {
+    this.borrowService.getBookRequests().subscribe(data => {
+      this.bookRequestList = data;
+      this.paginatedBookRequestList = this.bookRequestList.slice(0,this.pageSize)
+      console.log(data);
+    });
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.paginatedBookRequestList = this.bookRequestList.slice(startItem, endItem);
+  }
 }

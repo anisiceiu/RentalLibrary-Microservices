@@ -11,6 +11,7 @@ import { RoleGuard } from './helpers/role.guard';
 import { AddBindingComponent } from './add-binding/add-binding.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddBookComponent } from './add-book/add-book.component';
+import { RequestListComponent } from './request-list/request-list.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -18,10 +19,11 @@ const routes: Routes = [
   {path:'register',component:RegisterMemberComponent},
   {path:'', component:LandingPageComponent,canActivate:[AuthGuard],
    children:[
-    {path:'overview',component:OverviewComponent,data:{role:'User'},canActivate:[RoleGuard]},
+    {path:'overview',component:OverviewComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
     {path:'add-binding',component:AddBindingComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
     {path:'add-category',component:AddCategoryComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
-    {path:'add-book',component:AddBookComponent,data:{role:'Administrator'},canActivate:[RoleGuard]}
+    {path:'add-book',component:AddBookComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
+    {path:'request-list',component:RequestListComponent,data:{role:'Administrator'},canActivate:[RoleGuard]}
    ] 
   },
   { path:'404',component:NotFoundComponent},

@@ -43,6 +43,13 @@ namespace Borrowing.API.Controllers
                 return BadRequest("Could not be reserved.");
         }
 
+        [Authorize]
+        [HttpGet("GetBookRequests")]
+        public async Task<IActionResult> GetBookRequestsAsync()
+        {
+            return Ok(await _borrowRepository.GetAllBookRequestAsync());
+        }
+
         [HttpGet("GetFineTest")]
         public async Task<IActionResult> GetFineAsync()
         {

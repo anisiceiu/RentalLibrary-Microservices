@@ -22,4 +22,9 @@ export class BorrowService {
     return this.http.post<any>(`${this.baseUrl}/Borrow/BookReserveRequest`,request);
   }
 
+  public getBookRequests()
+  {
+    return this.http.get<any>(`${this.baseUrl}/Borrow/GetBookRequests`);
+  }
+
 }
