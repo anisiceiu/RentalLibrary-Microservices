@@ -7,7 +7,7 @@ namespace Borrowing.API.Repositories
         Task<Request> BookReserveRequestAsync(Request request);
         Task<Request> BookRenewRequestAsync(Request request);
         Task<List<Request>> GetAllBookRequestAsync();
-        Task<Borrow> IssueBookAsync(int userId,Request request);
+        Task<Borrow?> IssueBookAsync(int userId,Request request);
         Task<List<Borrow>> GetAllBorrowedBookByMemberIdAsync(int memberId);
         Task<List<Borrow>> GetAllOverDueBorrowedBookAsync();
         Task<Return> ReturnBookAsync(int userId, Borrow borrow);

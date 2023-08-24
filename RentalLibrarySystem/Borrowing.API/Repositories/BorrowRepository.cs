@@ -69,8 +69,11 @@ namespace Borrowing.API.Repositories
             return await _context.Returns.Where(c => c.Id == returnId).FirstOrDefaultAsync();
         }
 
-        public async Task<Borrow> IssueBookAsync(int userId, Request request)
+        public async Task<Borrow?> IssueBookAsync(int userId, Request request)
         {
+            if (_context.Borrows.Where(c => c.RequestId == request.Id).Any())
+                return null;
+
             int rate = _configuration.GetValue<int>("PerDayFees");
             int days = Convert.ToInt32((request.ToDate - request.FromDate).TotalDays);
             var fees = await Task.FromResult(rate * days);
@@ -82,7 +85,8 @@ namespace Borrowing.API.Repositories
                 DueDate = request.ToDate,
                 Fees = fees,
                 MemberId = request.MemberId,
-                UserId = userId
+                UserId = userId,
+                RequestId = request.Id
             };
 
             await _context.Borrows.AddAsync(borrow);
