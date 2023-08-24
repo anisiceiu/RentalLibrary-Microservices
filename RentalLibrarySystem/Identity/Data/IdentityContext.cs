@@ -18,7 +18,8 @@ namespace Identity.Data
         {
             modelBuilder.Entity<Role>().HasData(
                 new Role { RoleId = 1, Name = "Administrator" },
-                new Role { RoleId = 2, Name = "User" }
+                new Role { RoleId = 2, Name = "User" },
+                new Role { RoleId = 3, Name = "Librarian" }
                 );
 
             modelBuilder.Entity<User>().HasData(

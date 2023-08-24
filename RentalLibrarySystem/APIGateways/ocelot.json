@@ -133,6 +133,18 @@
       ]
     },
     {
+      "UpstreamPathTemplate": "/Borrow/BookIssueRequest",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Borrow/BookIssueRequest",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7197
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/Borrow/GetBookRequests",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/Borrow/GetBookRequests",

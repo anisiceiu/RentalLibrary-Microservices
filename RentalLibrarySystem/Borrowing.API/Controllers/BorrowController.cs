@@ -43,6 +43,22 @@ namespace Borrowing.API.Controllers
                 return BadRequest("Could not be reserved.");
         }
 
+        [Authorize(Roles = "Administrator,Librarian")]
+        [HttpPost("BookIssueRequest")]
+        public async Task<IActionResult> BookIssueRequestAsync(Request request)
+        {
+            var result = await _borrowRepository.IssueBookAsync(base.CurrentUser.UserId,request);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Could not be reserved.");
+            }
+        }
+
         [Authorize]
         [HttpGet("GetBookRequests")]
         public async Task<IActionResult> GetBookRequestsAsync()

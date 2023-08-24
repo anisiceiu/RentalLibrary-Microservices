@@ -22,6 +22,11 @@ export class BorrowService {
     return this.http.post<any>(`${this.baseUrl}/Borrow/BookReserveRequest`,request);
   }
 
+  public issueBook(request:ReserveRequest)
+  {
+    return this.http.post<any>(`${this.baseUrl}/Borrow/BookIssueRequest`,request);
+  }
+
   public getBookRequests()
   {
     return this.http.get<any>(`${this.baseUrl}/Borrow/GetBookRequests`);
