@@ -25,8 +25,9 @@ export class RegisterMemberComponent {
         if(data)
         {
           this.toastr.success('Member registered successfully',"Success");
-          console.log('add member',data);
         }
+     },error=>{
+        this.toastr.error("Could not add the member.")
      });
     }
     else{

@@ -39,6 +39,8 @@ export class OverviewComponent {
         {
           this.toastr.success("Book reserved Successfully!");
         }
+    },error=>{
+      this.toastr.error("Could not reserve the book.")
     });
   }
 

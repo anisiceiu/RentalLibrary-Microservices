@@ -26,15 +26,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             const error = err.error?.message || err.statusText;
 
-            if ([400, 404, 500].includes(err.status)) {
-                if (err.status == 400)
-                    this.toastr.error("Sorry! Could not be done.");
-                else if (err.status == 404)
-                    this.toastr.error("Not Found!");
-                else if (err.status == 500)
-                    this.toastr.error("Internal Server Error!");
-            }
-
 
             return throwError(() => error);
         }))

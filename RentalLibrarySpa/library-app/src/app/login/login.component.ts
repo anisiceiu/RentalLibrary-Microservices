@@ -14,7 +14,7 @@ export class LoginComponent {
   password: string='';
   error: string='';
 
-  constructor(private router: Router,private authService:AuthenticationService) {
+  constructor(private router: Router,private toastr:ToastrService,private authService:AuthenticationService) {
     
    }
 
@@ -31,9 +31,10 @@ export class LoginComponent {
         }
         else{
             this.error = 'Invalid username or password';
-            console.log('login e esecilo...')
         }
 
+      },err=>{
+        this.toastr.error(this.error);
       });
   }
 }

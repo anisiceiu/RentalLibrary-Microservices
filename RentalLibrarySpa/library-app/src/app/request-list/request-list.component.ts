@@ -24,7 +24,6 @@ export class RequestListComponent {
     this.borrowService.getBookRequests().subscribe(data => {
       this.bookRequestList = data;
       this.paginatedBookRequestList = this.bookRequestList.slice(0,this.pageSize)
-      console.log(data);
     });
   }
 
@@ -35,6 +34,8 @@ export class RequestListComponent {
        {
         this.toastr.success("Book Issued Successfully!");
        }
+    },error=>{
+      this.toastr.error("Book Issued Failed!");
     });
   }
 
