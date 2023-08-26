@@ -1,4 +1,6 @@
-﻿namespace Borrowing.API.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Borrowing.API.Entities
 {
     public class Borrow
     {
@@ -10,5 +12,7 @@
         public DateTime DateBorrowed { get; set; }
         public DateTime DueDate { get; set; }
         public int Fees { get; set; }
+        [NotMapped]
+        public string BookName { get; set; }
     }
 }

@@ -1,0 +1,27 @@
+<table class="table caption-top">
+    <caption>List of My Borrowed Books</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let borrow of paginatedBookBorrowedList;let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{borrow.bookName}}</td>
+        <td>{{borrow.dateBorrowed | date}}</td>
+        <td>{{borrow.dueDate | date}}</td>
+        <td>
+            <button  type="button" class="btn btn-info">Renew</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <pagination class="mt-2" [totalItems]="bookBorrowedList.length" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+  

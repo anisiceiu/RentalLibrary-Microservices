@@ -25,6 +25,33 @@ namespace Borrowing.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("GetBorrowedBookByMemberId/{id?}")]
+        public async Task<IActionResult> GetBorrowedBookByMemberIdAsync(int id=0)
+        {
+          var memberId = id > 0 ? id : Convert.ToInt32(base.CurrentUser.MemberId);
+          var borrows =  await _borrowRepository.GetAllBorrowedBookByMemberIdAsync(memberId);
+        
+          return Ok(borrows);
+        }
+
+        [Authorize]
+        [HttpPost("BookRenewRequest")]
+        public async Task<IActionResult> BookRenewRequestAsync(Request request)
+        {
+            request.MemberId = Convert.ToInt32(base.CurrentUser.MemberId);
+            request.MemberName = base.CurrentUser.MemberName;
+
+            var result = await _borrowRepository.BookRenewRequestAsync(request);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+                return BadRequest("Could not be reserved.");
+        }
+
+        [Authorize]
         [HttpPost("BookReserveRequest")]
         public async Task<IActionResult> BookReserveRequestAsync(Request request)
         {

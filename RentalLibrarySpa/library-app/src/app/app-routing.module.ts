@@ -12,6 +12,7 @@ import { AddBindingComponent } from './add-binding/add-binding.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { RequestListComponent } from './request-list/request-list.component';
+import { MyBorrowedBookComponent } from './my-borrowed-book/my-borrowed-book.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
     {path:'add-binding',component:AddBindingComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
     {path:'add-category',component:AddCategoryComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
     {path:'add-book',component:AddBookComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
-    {path:'request-list',component:RequestListComponent,data:{role:'Administrator'},canActivate:[RoleGuard]}
+    {path:'request-list',component:RequestListComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
+    {path:'borrowed-book',component:MyBorrowedBookComponent}
    ] 
   },
   { path:'404',component:NotFoundComponent},

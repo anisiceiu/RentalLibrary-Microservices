@@ -32,9 +32,19 @@ export class BorrowService {
     return this.http.post<any>(`${this.baseUrl}/Borrow/BookIssueRequestRejected`,request);
   }
 
+  public bookRenewRequest(request:ReserveRequest)
+  {
+    return this.http.post<any>(`${this.baseUrl}/Borrow/BookRenewRequest`,request);
+  }
+
   public getBookRequests()
   {
     return this.http.get<any>(`${this.baseUrl}/Borrow/GetBookRequests`);
+  }
+
+  public getMyBorrowedBook(id:number=0)
+  {
+    return this.http.get<any>(`${this.baseUrl}/Borrow/GetBorrowedBookByMemberId/${id}`);
   }
 
 }

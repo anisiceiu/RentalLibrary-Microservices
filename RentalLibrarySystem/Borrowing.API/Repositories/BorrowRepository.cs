@@ -17,7 +17,9 @@ namespace Borrowing.API.Repositories
 
         public async Task<Request> BookRenewRequestAsync(Request request)
         {
-            return await BookReserveRequestAsync(request);
+            await _context.Requests.AddAsync(request);
+            await _context.SaveChangesAsync();
+            return request;
         }
 
         public async Task<Request> BookReserveRequestAsync(Request request)
@@ -46,7 +48,24 @@ namespace Borrowing.API.Repositories
 
         public async Task<List<Borrow>> GetAllBorrowedBookByMemberIdAsync(int memberId)
         {
-            return await _context.Borrows.Where(c => c.MemberId == memberId).ToListAsync();
+            return await _context.Borrows
+                .Where(c => c.MemberId == memberId)
+                .Join(_context.Requests,
+                 borrow => borrow.RequestId,
+                 request => request.Id,
+                 (bor, req) => new Borrow
+                 {
+                     BookId = bor.BookId,
+                     BookName = req.BookName,
+                     DateBorrowed = bor.DateBorrowed,
+                     DueDate = bor.DueDate,
+                     Id = bor.Id,
+                     MemberId = bor.MemberId,
+                     RequestId = bor.RequestId,
+                     Fees = bor.Fees,
+                     UserId = bor.UserId
+                 })
+                .ToListAsync();
         }
 
         public async Task<List<Borrow>> GetAllOverDueBorrowedBookAsync()
@@ -132,7 +151,7 @@ namespace Borrowing.API.Repositories
         public async Task<Request?> RejectRequestAsync(int requestId)
         {
             var req = await _context.Requests.Where(c => c.Id == requestId).FirstOrDefaultAsync();
-            if(req == null)
+            if (req == null)
                 return null;
             else
             {
