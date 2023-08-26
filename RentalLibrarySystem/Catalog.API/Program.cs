@@ -30,7 +30,7 @@ namespace Catalog.API
             builder.Services.AddAutoMapper(typeof(MapperConfig));
             builder.Services.AddMassTransit(x =>
             {
-                x.AddConsumer<ReserveBookConsumer>();
+                x.AddConsumer<RequestBookConsumer>();
 
                 x.UsingRabbitMq((context, cfg) =>
                 {
@@ -43,7 +43,7 @@ namespace Catalog.API
 
                     cfg.ReceiveEndpoint(ServiceBus.QueueNames.catalogQueue, c =>
                     {
-                        c.ConfigureConsumer<ReserveBookConsumer>(context);
+                        c.ConfigureConsumer<RequestBookConsumer>(context);
                     });
 
                 });

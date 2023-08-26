@@ -7,4 +7,5 @@ export class ReserveRequest{
     fromDate:Date=new Date();
     toDate:Date = new Date();
     memberName:string="";
+    requestStatus: string="";
 }

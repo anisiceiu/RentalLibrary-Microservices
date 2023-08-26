@@ -19,9 +19,12 @@
         <td>{{request.requestType}}</td>
         <td>{{request.fromDate | date}}</td>
         <td>{{request.toDate | date}}</td>
-        <td>
+        <td *ngIf="!request.requestStatus">
             <button (click)="acceptRequest(request)" type="button" class="btn btn-success">Accept</button>&nbsp;
-            <button type="button" class="btn btn-danger">Reject</button>
+            <button (click)="rejectRequest(request)"  type="button" class="btn btn-danger">Reject</button>
+        </td>
+        <td *ngIf="request.requestStatus != null">
+          {{request.requestStatus}}
         </td>
       </tr>
     </tbody>

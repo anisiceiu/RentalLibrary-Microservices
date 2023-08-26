@@ -26,6 +26,11 @@ export class BorrowService {
   {
     return this.http.post<any>(`${this.baseUrl}/Borrow/BookIssueRequest`,request);
   }
+  
+  public bookIssueRequestRejected(request:ReserveRequest)
+  {
+    return this.http.post<any>(`${this.baseUrl}/Borrow/BookIssueRequestRejected`,request);
+  }
 
   public getBookRequests()
   {

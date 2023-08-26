@@ -36,6 +36,8 @@ namespace Borrowing.API.Controllers
             if (result != null)
             {
                 var reserve_request = _mapper.Map<Common.SharedModels.Request>(result);
+                reserve_request.OperationName = "reserve_request";
+
                 await _publishEndpoint.Publish(reserve_request);
                 return Ok(result); 
             }
@@ -56,6 +58,27 @@ namespace Borrowing.API.Controllers
             else
             {
                 return BadRequest("Could not be reserved.");
+            }
+        }
+
+        [Authorize(Roles = "Administrator,Librarian")]
+        [HttpPost("BookIssueRequestRejected")]
+        public async Task<IActionResult> BookIssueRejectedAsync(Request request)
+        {
+            var result = await _borrowRepository.RejectRequestAsync(request.Id);
+
+            if (result != null)
+            {
+                var reject_request = _mapper.Map<Common.SharedModels.Request>(result);
+                reject_request.OperationName = "reject_request";
+
+                await _publishEndpoint.Publish(reject_request);
+
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Could not be rejected.");
             }
         }
 

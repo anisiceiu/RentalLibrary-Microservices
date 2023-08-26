@@ -92,6 +92,14 @@ namespace Borrowing.API.Repositories
             await _context.Borrows.AddAsync(borrow);
             await _context.SaveChangesAsync();
 
+            var req = _context.Requests.Where(c => c.Id == request.Id).FirstOrDefault();
+
+            if (req != null)
+            {
+                req.RequestStatus = "Accepted";
+                await _context.SaveChangesAsync();
+            }
+
             return borrow;
         }
 
@@ -119,6 +127,20 @@ namespace Borrowing.API.Repositories
             int fineRate = _configuration.GetValue<int>("PerDayFine");
             int delayDays = Convert.ToInt32((DateTime.UtcNow - dueDate).TotalDays);
             return await Task.FromResult(fineRate * delayDays);
+        }
+
+        public async Task<Request?> RejectRequestAsync(int requestId)
+        {
+            var req = await _context.Requests.Where(c => c.Id == requestId).FirstOrDefaultAsync();
+            if(req == null)
+                return null;
+            else
+            {
+                req.RequestStatus = "Rejected";
+                await _context.SaveChangesAsync();
+
+                return req;
+            }
         }
     }
 }

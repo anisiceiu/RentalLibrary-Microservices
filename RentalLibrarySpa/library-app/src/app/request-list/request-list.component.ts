@@ -39,6 +39,18 @@ export class RequestListComponent {
     });
   }
 
+  rejectRequest(request:ReserveRequest)
+  {
+    this.borrowService.bookIssueRequestRejected(request).subscribe((data)=>{
+       if(data)
+       {
+        this.toastr.success("Book Issue request rejected Successfully!");
+       }
+    },error=>{
+      this.toastr.error("Book Issue request Failed!");
+    });
+  }
+
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;

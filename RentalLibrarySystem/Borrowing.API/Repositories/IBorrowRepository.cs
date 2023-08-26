@@ -15,5 +15,6 @@ namespace Borrowing.API.Repositories
         Task<Borrow?> GetBorrowByIdAsync(int borrowId);
         Task<Return?> GetReturnByIdAsync(int returnId);
         Task<int> CalculateFineAsync(DateTime dueDate);
+        Task<Request?> RejectRequestAsync(int requestId);
     }
 }
