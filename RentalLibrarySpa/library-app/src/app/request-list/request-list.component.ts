@@ -23,7 +23,7 @@ export class RequestListComponent {
   getbookRequestList() {
     this.borrowService.getBookRequests().subscribe(data => {
       this.bookRequestList = data;
-      this.paginatedBookRequestList = this.bookRequestList.slice(0,this.pageSize)
+      this.paginatedBookRequestList = this.bookRequestList.slice(0,this.pageSize);
     });
   }
 

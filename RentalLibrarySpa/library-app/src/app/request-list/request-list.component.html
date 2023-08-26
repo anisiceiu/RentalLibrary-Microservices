@@ -23,8 +23,11 @@
             <button (click)="acceptRequest(request)" type="button" class="btn btn-success">Accept</button>&nbsp;
             <button (click)="rejectRequest(request)"  type="button" class="btn btn-danger">Reject</button>
         </td>
-        <td *ngIf="request.requestStatus != null">
-          {{request.requestStatus}}
+        <td *ngIf="request.requestStatus == 'Accepted'">
+          <span class="text-white bg-success">{{request.requestStatus}}</span>
+        </td>
+        <td *ngIf="request.requestStatus == 'Rejected'">
+          <span class="text-white bg-danger">{{request.requestStatus}}</span>
         </td>
       </tr>
     </tbody>

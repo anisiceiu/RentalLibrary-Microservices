@@ -8,4 +8,5 @@ export class Borrow{
     dueDate? :Date;
     fees?:number;
     bookName:string="";
+    isReturned:boolean=false;
 }

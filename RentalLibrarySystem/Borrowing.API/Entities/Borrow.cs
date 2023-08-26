@@ -12,6 +12,7 @@ namespace Borrowing.API.Entities
         public DateTime DateBorrowed { get; set; }
         public DateTime DueDate { get; set; }
         public int Fees { get; set; }
+        public bool IsReturned { get; set; }
         [NotMapped]
         public string BookName { get; set; }
     }

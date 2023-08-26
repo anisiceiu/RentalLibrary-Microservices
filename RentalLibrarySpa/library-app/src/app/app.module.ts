@@ -23,6 +23,7 @@ import { AddBookComponent } from './add-book/add-book.component';
 import { ImgFallbackDirective } from './directives/img-fallback.directive';
 import { RequestListComponent } from './request-list/request-list.component';
 import { MyBorrowedBookComponent } from './my-borrowed-book/my-borrowed-book.component';
+import { BookReturnComponent } from './book-return/book-return.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MyBorrowedBookComponent } from './my-borrowed-book/my-borrowed-book.com
     AddBookComponent,
     ImgFallbackDirective,
     RequestListComponent,
-    MyBorrowedBookComponent
+    MyBorrowedBookComponent,
+    BookReturnComponent
   ],
   imports: [
     BrowserModule,

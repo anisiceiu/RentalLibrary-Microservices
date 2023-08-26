@@ -6,6 +6,7 @@
         <th scope="col">Book Name</th>
         <th scope="col">From</th>
         <th scope="col">To</th>
+        <th scope="col">Is Returned</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -15,6 +16,7 @@
         <td>{{borrow.bookName}}</td>
         <td>{{borrow.dateBorrowed | date}}</td>
         <td>{{borrow.dueDate | date}}</td>
+        <td>{{borrow.isReturned ? 'Yes' : 'No'}}</td>
         <td>
             <button  type="button" class="btn btn-info">Renew</button>
         </td>

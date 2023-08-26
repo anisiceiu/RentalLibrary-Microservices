@@ -138,6 +138,14 @@ namespace Borrowing.API.Repositories
             await _context.Returns.AddAsync(returnbook);
             await _context.SaveChangesAsync();
 
+            var bor = await _context.Borrows.FirstOrDefaultAsync(c=>c.Id == borrow.Id);
+
+            if (bor != null)
+            {
+                bor.IsReturned = true;
+                await _context.SaveChangesAsync();
+            }
+
             return returnbook;
         }
 
