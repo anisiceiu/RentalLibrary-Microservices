@@ -47,4 +47,12 @@ export class BorrowService {
     return this.http.get<any>(`${this.baseUrl}/Borrow/GetBorrowedBookByMemberId/${id}`);
   }
 
+  public getBorrowedBookByMemberNo(memberNo:string)
+  {
+    return this.http.get<any>(`${this.baseUrl}/Borrow/GetBorrowedBookByMemberNo/${memberNo}`);
+  }
+  public GetAllBorrowedBooks()
+  {
+    return this.http.get<any>(`${this.baseUrl}/Borrow/GetAllBorrowedBooks`);
+  }
 }

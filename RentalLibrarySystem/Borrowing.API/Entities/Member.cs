@@ -1,6 +1,6 @@
-﻿namespace Member.API.Entities
+﻿namespace Borrowing.API.Entities
 {
-    public class MemberDetail
+    public class Member
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -8,6 +8,7 @@
         public string ContactNo { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+        public string Password { get; set; }
         public string MemberNo { get; set; }
     }
 }

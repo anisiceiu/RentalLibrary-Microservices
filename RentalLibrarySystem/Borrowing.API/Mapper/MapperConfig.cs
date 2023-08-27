@@ -8,6 +8,7 @@ namespace Borrowing.API.Mapper
         public MapperConfig()
         {
             CreateMap<Request, Common.SharedModels.Request>().ReverseMap();
+            CreateMap<Member, Common.SharedModels.Member>().ReverseMap();
         }
     }
 }

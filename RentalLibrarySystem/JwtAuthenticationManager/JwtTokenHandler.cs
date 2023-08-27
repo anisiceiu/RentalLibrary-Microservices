@@ -42,13 +42,13 @@ namespace JwtAuthenticationManager
         }
 
         public TokenResponse GenerateJwtToken(string username,List<string> roles, string signingKey, string issuer, string audience,
-        TimeSpan expiration, Claim[] additionalClaims)
+        TimeSpan expiration, Claim[] additionalClaims,string? memberNo=null)
         {
             var token = GetJwtToken(username,signingKey, issuer, audience, expiration, additionalClaims);
 
             var response = new TokenResponse()
             {
-                Username = username,
+                Username = memberNo== null ? username : $"{username}({memberNo})",
                 Roles = roles,
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
                 ExpiresOnUtc = token.ValidTo

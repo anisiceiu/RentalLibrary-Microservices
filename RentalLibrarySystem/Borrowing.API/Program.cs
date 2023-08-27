@@ -5,6 +5,7 @@ using Common;
 using JwtAuthenticationManager.Extension;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Borrowing.API.Consumer;
 
 namespace Borrowing.API
 {
@@ -27,6 +28,8 @@ namespace Borrowing.API
 
             builder.Services.AddMassTransit(x =>
             {
+                x.AddConsumer<MemberCreatedConsumer>();
+
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     var uri = new Uri(ServiceBus.Url);
@@ -34,6 +37,11 @@ namespace Borrowing.API
                     {
                         host.Username(ServiceBus.UserName);
                         host.Password(ServiceBus.Password);
+                    });
+
+                    cfg.ReceiveEndpoint(ServiceBus.QueueNames.borrowingQueue, c =>
+                    {
+                        c.ConfigureConsumer<MemberCreatedConsumer>(context);
                     });
                 });
             });

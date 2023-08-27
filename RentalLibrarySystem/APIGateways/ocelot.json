@@ -181,6 +181,30 @@
       ]
     },
     {
+      "UpstreamPathTemplate": "/Borrow/GetBorrowedBookByMemberNo/{memberNo}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Borrow/GetBorrowedBookByMemberNo/{memberNo}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7197
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/Borrow/GetAllBorrowedBooks",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Borrow/GetAllBorrowedBooks",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7197
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/Borrow/GetBookRequests",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/Borrow/GetBookRequests",

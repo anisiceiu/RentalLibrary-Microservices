@@ -12,5 +12,6 @@ namespace Borrowing.API.Data
         public DbSet<Request> Requests { get; set; }
         public DbSet<Borrow> Borrows { get; set; }
         public DbSet<Return> Returns { get; set; }
+        public DbSet<Member> Members { get; set; }
     }
 }

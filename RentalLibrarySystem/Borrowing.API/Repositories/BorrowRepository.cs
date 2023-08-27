@@ -169,5 +169,58 @@ namespace Borrowing.API.Repositories
                 return req;
             }
         }
+
+        public async Task<Member> AddMemberAsync(Member member)
+        {
+            await _context.Members.AddAsync(member);
+            await _context.SaveChangesAsync();
+
+            return member;
+        }
+
+        public async Task<List<Borrow>> GetAllBorrowedBookByMemberNoAsync(string memberNo)
+        {
+            return await _context.Borrows
+                .Where(c => c.MemberNo == memberNo)
+                .Join(_context.Requests,
+                 borrow => borrow.RequestId,
+                 request => request.Id,
+                 (bor, req) => new Borrow
+                 {
+                     BookId = bor.BookId,
+                     BookName = req.BookName,
+                     DateBorrowed = bor.DateBorrowed,
+                     DueDate = bor.DueDate,
+                     Id = bor.Id,
+                     MemberId = bor.MemberId,
+                     MemberNo = bor.MemberNo,
+                     RequestId = bor.RequestId,
+                     Fees = bor.Fees,
+                     UserId = bor.UserId
+                 })
+                .ToListAsync();
+        }
+
+        public async Task<List<Borrow>> GetAllBorrowedBooksAsync()
+        {
+            return await _context.Borrows
+                .Join(_context.Requests,
+                 borrow => borrow.RequestId,
+                 request => request.Id,
+                 (bor, req) => new Borrow
+                 {
+                     BookId = bor.BookId,
+                     BookName = req.BookName,
+                     DateBorrowed = bor.DateBorrowed,
+                     DueDate = bor.DueDate,
+                     Id = bor.Id,
+                     MemberId = bor.MemberId,
+                     MemberNo = bor.MemberNo,
+                     RequestId = bor.RequestId,
+                     Fees = bor.Fees,
+                     UserId = bor.UserId
+                 })
+                .ToListAsync();
+        }
     }
 }

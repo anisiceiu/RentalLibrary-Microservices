@@ -14,6 +14,8 @@ namespace Member.API.Repositories
         }
         public async Task<MemberDetail> AddMemberAsync(MemberDetail member)
         {
+            member.MemberNo = await GenerateNewMemberNoAsync();
+
             await _memberContext.MemberDetails.AddAsync(member);
             await _memberContext.SaveChangesAsync();
             return member;
@@ -29,6 +31,20 @@ namespace Member.API.Repositories
         {
             var members = await _memberContext.MemberDetails.ToListAsync();
             return members;
+        }
+
+        private async Task<string> GenerateNewMemberNoAsync()
+        {
+            Random generator = new Random();
+            String r = generator.Next(0, 1000000).ToString("D6");
+            var existingMemberNo = await _memberContext.MemberDetails.Select(c => c.MemberNo).ToListAsync();
+
+            while(existingMemberNo.Contains(r))
+            {
+                r = generator.Next(0, 1000000).ToString("D6");
+            }
+
+            return r;
         }
     }
 }

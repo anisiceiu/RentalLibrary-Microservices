@@ -28,7 +28,8 @@ namespace Identity.Consumer
                 PasswordHash = _userRepository.ComputeSha256Hash(member.Password),
                 Phone = member.ContactNo,
                 Username = member.UserName,
-                MemberName = member.Name
+                MemberName = member.Name,
+                MemberNo = member.MemberNo
             };
 
             await _userRepository.AddMemberUserAsync(user);

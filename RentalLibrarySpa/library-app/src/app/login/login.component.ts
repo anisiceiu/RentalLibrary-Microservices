@@ -34,7 +34,7 @@ export class LoginComponent {
         }
 
       },err=>{
-        this.toastr.error(this.error);
+        this.toastr.error(err);
       });
   }
 }

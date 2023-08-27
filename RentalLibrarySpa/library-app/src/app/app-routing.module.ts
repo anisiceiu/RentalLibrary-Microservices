@@ -19,6 +19,12 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterMemberComponent},
   {path:'', component:LandingPageComponent,canActivate:[AuthGuard],
+  children:[
+    {path:'overview',component:OverviewComponent,data:{role:'User'},canActivate:[RoleGuard]},
+    {path:'borrowed-book',component:MyBorrowedBookComponent}
+  ]
+  },
+  {path:'', component:LandingPageComponent,canActivate:[AuthGuard],
    children:[
     {path:'overview',component:OverviewComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},
     {path:'add-binding',component:AddBindingComponent,data:{role:'Administrator'},canActivate:[RoleGuard]},

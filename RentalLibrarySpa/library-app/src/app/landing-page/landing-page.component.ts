@@ -8,12 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent {
-  constructor(private authService:AuthenticationService,router:Router)
+
+  username:string="";
+
+  constructor(public authService:AuthenticationService,router:Router)
   {
     if(!authService.userValue)
     {
       router.navigate(['login']);
     }
+/*     else{
+      this.username = authService.userValue.username;
+    } */
 
   }
 

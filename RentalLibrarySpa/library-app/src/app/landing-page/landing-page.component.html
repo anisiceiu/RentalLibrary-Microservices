@@ -1,23 +1,26 @@
 <nav class="navbar navbar-light bg-light p-3">
     <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
         <a class="navbar-brand" href="#">
-            Simple Dashboard
+          Dashboard
         </a>
         <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
     <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-              John Doe
+<!--         <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+              {{authService.userValue?.username}}&nbsp;
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" href="javascript:void(0)">Settings</a></li>
               <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
               <li><a class="dropdown-item" href="javascript:void(0)" (click)="signOut()">Sign out</a></li>
             </ul>
-          </div>
+          </div> -->
+          <button class="btn btn-info" type="button">
+            {{authService.userValue?.username}}
+          </button>
     </div>
 </nav>
 <div class="container-fluid">
@@ -77,6 +80,12 @@
                       <a class="nav-link" onclick="setAvtiveMen(this)" href="javascript:void(0)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                         <span class="ml-2">Integrations</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" (click)="signOut()" onclick="setAvtiveMen(this)" href="javascript:void(0)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                        <span class="ml-2">Sign Out</span>
                       </a>
                     </li>               
                   </ul>

@@ -34,6 +34,24 @@ namespace Borrowing.API.Controllers
           return Ok(borrows);
         }
 
+        [Authorize(Roles = "Administrator,Librarian")]
+        [HttpGet("GetBorrowedBookByMemberNo/{memberNo}")]
+        public async Task<IActionResult> GetBorrowedBookByMemberNoAsync(string memberNo)
+        {
+            var borrows = await _borrowRepository.GetAllBorrowedBookByMemberNoAsync(memberNo);
+
+            return Ok(borrows);
+        }
+
+        [Authorize(Roles = "Administrator,Librarian")]
+        [HttpGet("GetAllBorrowedBooks")]
+        public async Task<IActionResult> GetAllBorrowedBooks()
+        {
+            var borrows = await _borrowRepository.GetAllBorrowedBooksAsync();
+
+            return Ok(borrows);
+        }
+
         [Authorize]
         [HttpPost("BookRenewRequest")]
         public async Task<IActionResult> BookRenewRequestAsync(Request request)

@@ -41,6 +41,7 @@ namespace Identity.Controllers
                 claims.Add(new Claim("UserId", loginUser.UserId.ToString()));
                 claims.Add(new Claim("MemberId", Convert.ToInt32(loginUser.MemberId).ToString()));
                 claims.Add(new Claim("MemberName", loginUser.MemberName?? ""));
+                claims.Add(new Claim("MemberNo", loginUser.MemberNo ?? ""));
 
                 // Add roles as multiple claims
                 var roles = new List<string>();
@@ -57,7 +58,8 @@ namespace Identity.Controllers
                                 JWTSettings.Issuer,
                                 JWTSettings.Audience,
                                 TimeSpan.FromMinutes(JWTSettings.TokenTimeoutMinutes),
-                                claims.ToArray());
+                                claims.ToArray(),
+                                loginUser.MemberNo);
 
                 return Ok(tokenresponse);
             }
